@@ -1,7 +1,7 @@
-module DbDump
+module DbBackup
   class Railtie < Rails::Railtie
     rake_tasks do
-      load 'tasks/db_dump_tasks.rake'
+      load 'tasks/db_backup_tasks.rake'
     end
   end
 end
