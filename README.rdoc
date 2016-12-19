@@ -1,3 +1,5 @@
-= DbDump
+= DbBackup
+
+Rails用データベースバックアップタスク
 
 This project rocks and uses MIT-LICENSE.
