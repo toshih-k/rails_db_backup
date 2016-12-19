@@ -25,6 +25,7 @@ namespace :db do
       options = {
         "user"=>config[:username],
         "password"=>config[:password],
+        "host"=>config[:host],
         "result-file"=>fullpath
       }.select{|k, v| !v.nil? }.map{|k, v| "--#{k}=#{v}"}.join(" ")
 
@@ -39,19 +40,20 @@ namespace :db do
     end
 
     desc "restore database data from dump"
-    task :restore do |task, args|
+    task restore: :environment do |task, args|
       config = ActiveRecord::Base.connection_config
       database_name = config[:database]
       options = {
         "user"=>config[:username],
-        "password"=>config[:password]
+        "password"=>config[:password],
+        "host"=>config[:host]
       }.select{|k, v| !v.nil? }.map{|k, v| "--#{k}=#{v}"}.join(" ")
 
       sh "mysql #{options} #{database_name} < #{backuplist.last}"
     end
 
     desc "list dumped database data"
-    task :list do |task, args|
+    task list: :environment do |task, args|
       backuplist.each do |item|
         puts item
       end
